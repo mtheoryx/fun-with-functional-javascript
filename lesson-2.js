@@ -8,7 +8,7 @@ const Box = x =>
 /**
 * Some new examples
 * Consider the following commented methods containing a lot of assignment 
-* and state.
+* and stateful variables littering the whole thing.
 * 
 * They seem relatively simple at first, but the applyDiscount is worrisome.
 * If this were written, correctly, as utility methods that are just reused
@@ -27,11 +27,17 @@ const moneyToFloat = str =>
     .map(s => s.replace(/\$/g, ''))
     .fold(r => parseFloat(r));
 
-const percentToFloat = str => {
-    const replaced = str.replace(/\%/g, '');
-    const number = parseFloat(replaced);
-    return number * 0.01;
-};
+// const percentToFloat = str => {
+//     const replaced = str.replace(/\%/g, '');
+//     const number = parseFloat(replaced);
+//     return number * 0.01;
+// };
+
+const percentToFloat = str => 
+    Box(str)
+    .map(s => s.replace(/\%/g, ''))
+    .map(r => parseFloat(r))
+    .fold(i => i * 0.01);
 
 const applyDiscount = (price, discount) => {
     const cost = moneyToFloat(price);
