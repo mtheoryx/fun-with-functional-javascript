@@ -17,6 +17,9 @@ const Box = x =>
 * did in the first place.
 * 
 * It doesn't have to be this way! The uncommemnted methods work perfectly!
+* 
+* Nesting boxes requires multiple calls to fold, something to keep
+* in mind, and indentation helps.
 */
 
 // const moneyToFloat = str => 
