@@ -29,3 +29,33 @@ const resultLeft =
     .fold(x => 'error', x => x);
 
 console.log(resultLeft); //-> error
+
+const findColor = name => 
+    ({red: '#ff4444', blue: '#3b5998', yellow: '#fff68f'})[name];
+    
+const resultFindColor = findColor('red').slice(1).toUpperCase();
+
+console.log(resultFindColor); //-> FF4444
+
+// const resultFindColorError = findColor('green').slice(1).toUpperCase();
+
+// console.log(resultFindColorError); //-> ERROR, script dies
+
+const fromNullable = x => 
+    x != null ? Right(x) : Left(null);
+
+const findColorEither = name => 
+    fromNullable({red: '#ff4444', blue: '#3b5998', yellow: '#fff68f'}[name]);
+
+const resultFindColorRed = findColorEither('red')
+                                .map(c => c.slice(1))
+                                .fold(e => 'no color found', 
+                                      c => c.toUpperCase());
+                            
+console.log(resultFindColorRed); //-> FF444
+
+const resultFindColorGreen = findColorEither('green')
+                                .map(c => c.slice(1))
+                                .fold(e => 'no color found', c => c.toUpperCase());;
+
+console.log(resultFindColorGreen); //-> no color found
